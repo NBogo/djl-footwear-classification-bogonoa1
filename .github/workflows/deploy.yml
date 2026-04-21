@@ -1,0 +1,22 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches: [ master ]
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t lilgoethe/djl-footwear-classification:latest .
+          docker push lilgoethe/djl-footwear-classification:latest
