@@ -45,10 +45,10 @@ import java.nio.file.Paths;
 public final class Training {
 
     // represents number of training samples processed before the model is updated
-    private static final int BATCH_SIZE = 32;
+    private static final int BATCH_SIZE = 16;
 
     // the number of passes over the complete dataset
-    private static final int EPOCHS = 2;
+    private static final int EPOCHS = 5;
 
     public static void main(String[] args) throws IOException, TranslateException {
         // the location to save the model
