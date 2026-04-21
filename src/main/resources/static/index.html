@@ -1,65 +1,56 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Footwear Classification</title>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" async></script>
+    <script src="script.js" defer></script>
 </head>
-
 <body>
+    <div class="app">
+        <header>
+            <h1>Footwear Classification</h1>
+            <p class="subtitle">Deep Learning powered by DJL &amp; ResNet50 &mdash; bogonoa1</p>
+            <div class="health-badge" id="healthBadge" title="Checking...">&#9679; checking</div>
+        </header>
 
-    <div class="container-fluid">
-        <h1>👟 Footwear Classification</h1>
-        <p class="subtitle">DeepJavaLibrary (DJL) Demonstration by mosa</p>
-
-        <div class="card border-0">
-            <div class="card-body">
-                <h5>Upload Footwear Image</h5>
-                <form>
-                    <div class="form-group">
-                        <input type="file" accept="image/png, image/jpeg" class="form-control-file" id="image" name="image"
-                            onchange="checkFiles(this.files);">
-                        <small class="form-text text-muted">Maximum file size: 10 MB (PNG, JPEG)</small>
-                    </div>
-                </form>
-            </div>
+        <div class="upload-zone" id="dropZone">
+            <div class="upload-icon">&#128065;</div>
+            <p class="upload-text">Drag &amp; drop an image here</p>
+            <p class="upload-or">or</p>
+            <label class="upload-btn" for="image">Browse files</label>
+            <input type="file" accept="image/png, image/jpeg" id="image" onchange="checkFiles(this.files);">
+            <p class="upload-hint">PNG or JPEG, max 10 MB</p>
         </div>
 
         <div id="answerPart" class="hidden">
-            <!-- Results Container with Image Left and Results Right -->
-            <div class="results-container">
-                <!-- Image Preview Section -->
-                <div class="preview-section">
-                    <h5>Analyzed Image</h5>
+            <div class="results-grid">
+                <div class="preview-card">
                     <img id="preview" src="#" alt="preview" />
                 </div>
-
-                <!-- Loading Indicator -->
-                <div id="loadingPart" class="loading" style="display: none;">
-                    <div class="spinner-border" role="status">
-                        <span class="sr-only">Loading...</span>
+                <div class="results-card">
+                    <div id="loadingPart" style="display:none;">
+                        <div class="spinner"></div>
+                        <p>Analyzing image...</p>
                     </div>
-                    <p>Analyzing image...</p>
-                </div>
-
-                <!-- Results Section -->
-                <div id="resultsPart" class="results-section" style="display: none;">
-                    <h5>Classification Results</h5>
-                    <div id="topResult" class="classification-item top-result" style="display: none;">
-                        <div class="classification-label" id="topLabel"></div>
-                        <div class="classification-percentage" id="topPercentage"></div>
+                    <div id="resultsPart" style="display:none;">
+                        <div id="topResult" class="top-result" style="display:none;">
+                            <span class="top-emoji" id="topEmoji"></span>
+                            <span class="top-label" id="topLabel"></span>
+                            <span class="top-pct" id="topPercentage"></span>
+                        </div>
+                        <div id="classificationList"></div>
+                        <button class="reset-btn" onclick="resetUI()">Classify another</button>
                     </div>
-                    <div id="classificationList"></div>
                 </div>
             </div>
         </div>
+
+        <footer>
+            <span>ZHAW MDM FS2026</span>
+            <span id="infoText"></span>
+        </footer>
     </div>
-
 </body>
-
 </html>
