@@ -20,3 +20,7 @@ jobs:
         run: |
           docker build -t lilgoethe/djl-footwear-classification:latest .
           docker push lilgoethe/djl-footwear-classification:latest
+
+      - name: Deploy to Azure Web App
+        run: |
+          curl -X POST "${{ secrets.AZURE_WEBHOOK_URL }}"
